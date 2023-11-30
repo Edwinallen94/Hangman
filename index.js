@@ -1,15 +1,26 @@
 import prompt from "readline-sync";
 import wordBank from "./word-bank.js";
 
-const readlineSync = require("readline-sync");
-const wordBank = require("./word-bank.js");
+// Function to pick a random word from the word bank
+const getRandomWord = () => {
+  const randomIndex = Math.floor(Math.random() * wordBank.length);
+  return wordBank[randomIndex].toLowerCase(); // Ensure lowercase for case insensitivity
+};
 
-// Main game loop
-const playHangman = () => {
-  console.log("\nWelcome to Hangman!\nPress ctrl+c to stop\n");
+// Function to initialize the display
+const initializeDisplay = (word) => {
+  return "_".repeat(word.length); // Display underscores for each letter in the word
+};
 
-  const wordToGuess = getRandomWord(wordBank);
-  let displayWord = initializeDisplay(wordToGuess);
-  let incorrectGuesses = 0;
-  let guessedLetters = [];
+// Function to update the display after each guess
+const updateDisplay = (word, display, letter) => {
+  let newDisplay = "";
+  for (let i = 0; i < word.length; i++) {
+    if (word[i] === letter) {
+      newDisplay += letter;
+    } else {
+      newDisplay += display[i];
+    }
+  }
+  return newDisplay;
 };
