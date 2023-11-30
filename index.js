@@ -24,3 +24,23 @@ const updateDisplay = (word, display, letter) => {
   }
   return newDisplay;
 };
+// Function to check if the guessed letter is in the word
+const checkGuess = (word, letter) => {
+  return word.includes(letter);
+};
+
+// Function to update the number of remaining guesses
+const updateGuesses = (guesses, isCorrect) => {
+  return isCorrect ? guesses : guesses - 1;
+};
+
+// Function to check if the game is over
+const isGameOver = (word, display, guesses) => {
+  return display === word || guesses === 0;
+};
+
+// Function to display game information
+const displayGameInfo = (display, guesses) => {
+  console.log(`\nWord: ${display}`);
+  console.log(`Guesses left: ${guesses}`);
+};
