@@ -44,3 +44,35 @@ const displayGameInfo = (display, guesses) => {
   console.log(`\nWord: ${display}`);
   console.log(`Guesses left: ${guesses}`);
 };
+
+// Main game loop
+const playHangman = () => {
+  console.log("\nWelcome to Hangman!\nPress ctrl+c to stop\n");
+
+  let word = getRandomWord();
+  let display = initializeDisplay(word);
+  let guesses = 6;
+
+  while (!isGameOver(word, display, guesses)) {
+    displayGameInfo(display, guesses);
+
+    const letter = prompt.question("Please guess a letter: ").toLowerCase();
+
+    if (checkGuess(word, letter)) {
+      console.log("Correct!");
+      display = updateDisplay(word, display, letter);
+    } else {
+      console.log("Incorrect!");
+      guesses = updateGuesses(guesses, false);
+    }
+  }
+
+  if (display === word) {
+    console.log("Congratulations! You've guessed the word!");
+  } else {
+    console.log(`Game over! The word was: ${word}`);
+  }
+};
+
+// Start the game
+playHangman();
